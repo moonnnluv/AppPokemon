@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">PokeApp</string>
+    <string name="ingresa_id">Ingresa ID</string>
+    <string name="buscar_pokemon">Buscar Pokémon</string>
+    <string name="resultado">Resultado:</string>
+    <string name="nombre">Nombre:</string>
+    <string name="tipo">Tipo:</string>
+    <string name="ir_activity_async">Ir Activity Async</string>
+    <string name="ir_activity_main">Ir Activity Main</string>
+    <string name="ir_activity_retrofit">Ir Activity Retrofit</string>
+    <string name="volver">Volver</string>
+    <string name="salir">Salir</string>
 </resources>
