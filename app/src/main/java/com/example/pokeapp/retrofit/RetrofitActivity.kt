@@ -22,10 +22,15 @@ import java.util.Locale
 
 class RetrofitActivity : AppCompatActivity() {
 
-    private lateinit var etID: EditText
-    private lateinit var btBuscar: Button
-    private lateinit var tvResultado: TextView
-    private lateinit var progressBar: ProgressBar
+    private lateinit var etID3: EditText
+    private lateinit var btBuscar3: Button
+    private lateinit var tvResultado3: TextView
+    private lateinit var progressBar3: ProgressBar
+
+    private lateinit var btIrMain3: Button
+    private lateinit var btIrAsync3: Button
+    private lateinit var btIrRetrofit3: Button
+
     private lateinit var service: PokeApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,15 +38,15 @@ class RetrofitActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_retrofit)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main3)) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(bars.left, bars.top, bars.right, bars.bottom); insets
         }
 
-        etID = findViewById(R.id.etID)
-        btBuscar = findViewById(R.id.btBuscar)
-        tvResultado = findViewById(R.id.tvResultado)
-        progressBar = findViewById(R.id.progressBar)
+        etID3 = findViewById(R.id.etID3)
+        btBuscar3 = findViewById(R.id.btBuscar3)
+        tvResultado3 = findViewById(R.id.tvResultado3)
+        progressBar3 = findViewById(R.id.progressBar3)
 
         supportActionBar?.title = "PokeApp RetrofitActivity"
 
@@ -51,16 +56,19 @@ class RetrofitActivity : AppCompatActivity() {
             .build()
         service = retrofit.create(PokeApiService::class.java)
 
-        btBuscar.setOnClickListener {
-            val q = etID.text.toString().trim().lowercase(Locale.ROOT)
-            if (q.isEmpty()) etID.error = getString(R.string.ingresa_id)
+        btBuscar3.setOnClickListener {
+            val q = etID3.text.toString().trim().lowercase(Locale.ROOT)
+            if (q.isEmpty()) etID3.error = getString(R.string.ingresa_id)
             else buscarPokemon(q)
         }
+
+        // llamada al método con la misma estructura que el tuyo
+        cambiarActividadesSalir()
     }
 
     private fun buscarPokemon(query: String) {
-        progressBar.visibility = View.VISIBLE
-        tvResultado.text = getString(R.string.resultado)
+        progressBar3.visibility = View.VISIBLE
+        tvResultado3.text = getString(R.string.resultado)
 
         service.getPokemon(query).enqueue(object : Callback<PokemonResponse> {
             override fun onResponse(
@@ -72,24 +80,26 @@ class RetrofitActivity : AppCompatActivity() {
                     val tipos = p.types.sortedBy { it.slot }.joinToString(", ") { it.type.name }
                     val alturaM = p.height / 10.0
                     val pesoKg = p.weight / 10.0
-                    tvResultado.text =
+                    tvResultado3.text =
                         "${getString(R.string.resultado)} " +
                                 "${getString(R.string.nombre)} ${p.name.replaceFirstChar { it.uppercase() }} | " +
                                 "${getString(R.string.tipo)} $tipos\n" +
                                 "ID: ${p.id} | Altura: ${alturaM} m | Peso: ${pesoKg} kg"
                 } else {
-                    tvResultado.text = "${getString(R.string.resultado)} Pokémon no encontrado (${response.code()})."
+                    tvResultado3.text =
+                        "${getString(R.string.resultado)} Pokémon no encontrado (${response.code()})."
                 }
-                progressBar.visibility = View.GONE
+                progressBar3.visibility = View.GONE
             }
 
             override fun onFailure(call: Call<PokemonResponse>, t: Throwable) {
-                tvResultado.text = "${getString(R.string.resultado)} Error de conexión."
-                progressBar.visibility = View.GONE
+                tvResultado3.text = "${getString(R.string.resultado)} Error de conexión."
+                progressBar3.visibility = View.GONE
             }
         })
     }
 
+    // 👇 Estructura igual a la que me mandaste
     private fun cambiarActividadesSalir() {
         // Botones para navegar a las otras pantallas
         btIrMain3 = findViewById(R.id.btIrMain3)
