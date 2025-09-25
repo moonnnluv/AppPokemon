@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.pokeapp.Retrofit.RetrofitActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE // Mostrar la barra de progreso
         tvResultado.text = getString(R.string.resultado) // Limpiar/encabezado
 
-        // Corrutina igual que el ejemplo de tu profe (lifecycleScope + context switch)
+        // Corrutina (lifecycleScope + context switch)
         lifecycleScope.launch {
             try {
                 // Operación de red en un hilo de fondo (IO)
@@ -110,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 tvResultado.text = "${getString(R.string.resultado)} Error de conexión. Verifica tu internet."
                 e.printStackTrace()
             } catch (e: JSONException) {
-                tvResultado.text = "${getString(R.string.resultado)} Error al parsear los datos."
+                tvResultado.text = "${getString(R.string.resultado)} Error al encontrar los datos."
                 e.printStackTrace()
             } catch (e: Exception) {
                 tvResultado.text = "${getString(R.string.resultado)} Ocurrió un error inesperado."
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity() {
         }
     } // Fin de fetchPokemonJson
 
-    // Función para cambiar las actividades (igual patrón que tu profe)
+    // Función para cambiar las actividades
     private fun cambiarActividadesSalir() {
         // Botones para navegar a las otras pantallas
         btIrMain = findViewById(R.id.btIrMain)
