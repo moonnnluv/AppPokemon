@@ -5,7 +5,8 @@ data class PokemonResponse(
     val name: String,
     val height: Int,
     val weight: Int,
-    val types: List<TypeSlot>
+    val types: List<TypeSlot>,
+    val sprites: Sprites   // mostrar imagen
 )
 
 data class TypeSlot(
@@ -16,3 +17,10 @@ data class TypeSlot(
 data class TypeInfo(
     val name: String
 )
+
+data class Sprites(
+    val front_default: String,
+    val back_default: String,
+    val front_shiny: String
+)
+
